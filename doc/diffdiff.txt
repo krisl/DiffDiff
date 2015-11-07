@@ -1,0 +1,32 @@
+diffdiff.txt   Diff sections of unified diffs
+
+================================================================================
+CONTENTS                                     diffdiff        diffdiff-contents
+
+    Installation...........................: diffdiff-installation
+    Usage..................................: diffdiff-usage
+    Commands...............................: diffdiff-commands
+    Settings...............................: diffdiff-settings
+    Internals..............................: diffdiff-internals
+    Issues.................................: diffdiff-issues
+
+
+================================================================================
+INSTALLATION                                             diffdiff-installation
+
+================================================================================
+USAGE                                                           diffdiff-usage
+
+================================================================================
+COMMANDS                                                     diffdiff-commands
+
+================================================================================
+SETTINGS                                                     diffdiff-settings
+
+================================================================================
+INTERNALS                                                   diffdiff-internals
+
+================================================================================
+ISSUES                                                         diffdiff-issues
+
+vim:tw=80:sw=4:ft=help:
