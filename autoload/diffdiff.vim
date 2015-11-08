@@ -19,4 +19,5 @@ function! diffdiff#DiffDiff()
   execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label merg'
 
   set nomodified
+  nnoremap <silent> <buffer> q :bw<cr>
 endfunction
