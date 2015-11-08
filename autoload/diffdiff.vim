@@ -14,9 +14,9 @@ function! diffdiff#DiffDiff()
   vnew
   set filetype=diff
 
-  execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label HEAD'
-  execute 'r !echo "\n\n\n"'
-  execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label merg'
+  silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label HEAD'
+  silent :execute 'r !echo "\n\n\n"'
+  silent :execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label merg'
 
   set nomodified
   nnoremap <silent> <buffer> q :bw<cr>
