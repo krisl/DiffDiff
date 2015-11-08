@@ -15,6 +15,8 @@ function! diffdiff#DiffDiff()
   set filetype=diff
 
   execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label HEAD'
-  execute 'r !echo "\n\n\n\n"'
+  execute 'r !echo "\n\n\n"'
   execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label merg'
+
+  set nomodified
 endfunction
