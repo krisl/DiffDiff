@@ -1,23 +1,20 @@
-function! diffdiff#DiffDiff()
-  let diff = @0
-  let [head, rest] = split(diff, '||||||| \p*\n')
-  let [ance, merg] = split(rest, '=======\n', 1)
-
-  if head=~'<<<<<<< \p*\n'
-    let [_, head]  = split(head, '<<<<<<< \p*\n', 1)
-  endif
-
-  if merg=~'>>>>>>> \p*\n'
-    let [merg, _]  = split(merg, '>>>>>>> \p*\n', 1)
+function! diffdiff#DiffDiff() range
+  let diff = getline(a:firstline, a:lastline)
+  let head_mark = match(diff, '<<<<<<<')
+  let ance_mark = match(diff, '|||||||', head_mark+1)
+  let merg_mark = match(diff, '=======', ance_mark+1)
+  let endd_mark = match(diff, '>>>>>>>', merg_mark+1)
+  if endd_mark == -1
+    let endd_mark = 0 "exclude end marker
   endif
 
   let file_head = tempname()
   let file_ance = tempname()
   let file_merg = tempname()
 
-  call writefile(split(head, '\n'), file_head)
-  call writefile(split(ance, '\n'), file_ance)
-  call writefile(split(merg, '\n'), file_merg)
+  call writefile(diff[head_mark+1:ance_mark-1], file_head)
+  call writefile(diff[ance_mark+1:merg_mark-1], file_ance)
+  call writefile(diff[merg_mark+1:endd_mark-1], file_merg)
 
   if exists('t:_DiffDiffbufnr') && bufwinnr(t:_DiffDiffbufnr) > 0
     exe bufwinnr(t:_DiffDiffbufnr)."wincmd W"
