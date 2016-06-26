@@ -3,6 +3,14 @@ function! diffdiff#DiffDiff()
   let [head, rest] = split(diff, '||||||| merged common ancestors\n')
   let [ance, merg] = split(rest, '=======\n', 1)
 
+  if head=~'<<<<<<< \S*\n'
+    let [_, head]  = split(head, '<<<<<<< \S*\n', 1)
+  endif
+
+  if merg=~'>>>>>>> \S*\n'
+    let [merg, _]  = split(merg, '>>>>>>> \S*\n', 1)
+  endif
+
   let file_head = tempname()
   let file_ance = tempname()
   let file_merg = tempname()
