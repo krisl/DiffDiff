@@ -19,8 +19,13 @@ function! diffdiff#DiffDiff()
   call writefile(split(ance, '\n'), file_ance)
   call writefile(split(merg, '\n'), file_merg)
 
-  vnew
-  set filetype=diff
+  if exists('t:_DiffDiffbufnr') && bufwinnr(t:_DiffDiffbufnr) > 0
+    exe bufwinnr(t:_DiffDiffbufnr)."wincmd W"
+  else
+    vnew
+    set filetype=diff
+    let t:_DiffDiffbufnr = bufnr('%')
+  endif
 
   silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label HEAD'
   silent :execute 'r !echo "\n\n\n"'
