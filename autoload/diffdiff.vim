@@ -1,7 +1,7 @@
 function! diffdiff#DiffDiff()
   let diff = @0
   let [head, rest] = split(diff, '||||||| merged common ancestors\n')
-  let [ance, merg] = split(rest, '=======\n')
+  let [ance, merg] = split(rest, '=======\n', 1)
 
   let file_head = tempname()
   let file_ance = tempname()
