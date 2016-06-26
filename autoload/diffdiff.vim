@@ -21,6 +21,7 @@ function! diffdiff#DiffDiff()
 
   if exists('t:_DiffDiffbufnr') && bufwinnr(t:_DiffDiffbufnr) > 0
     exe bufwinnr(t:_DiffDiffbufnr)."wincmd W"
+    exe 'normal ggdG'
   else
     vnew
     set filetype=diff
