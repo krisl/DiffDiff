@@ -1,14 +1,14 @@
 function! diffdiff#DiffDiff()
   let diff = @0
-  let [head, rest] = split(diff, '||||||| \v(\w|\s|\.|\!)*\n')
+  let [head, rest] = split(diff, '||||||| \v(\w|\s|\.|\!|\;)*\n')
   let [ance, merg] = split(rest, '=======\n', 1)
 
   if head=~'<<<<<<< \v(\w|\s|\.)*\n'
-    let [_, head]  = split(head, '<<<<<<< \v(\w|\s|\.|\!)*\n', 1)
+    let [_, head]  = split(head, '<<<<<<< \v(\w|\s|\.|\!|\;)*\n', 1)
   endif
 
   if merg=~'>>>>>>> \v(\w|\s|\.)*\n'
-    let [merg, _]  = split(merg, '>>>>>>> \v(\w|\s|\.|\!)*\n', 1)
+    let [merg, _]  = split(merg, '>>>>>>> \v(\w|\s|\.|\!|\;)*\n', 1)
   endif
 
   let file_head = tempname()
