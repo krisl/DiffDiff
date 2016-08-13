@@ -14,7 +14,7 @@ function! diffdiff#DiffDiff() range
   endif
 
   let label_head = s:getText(a:firstline + head_mark)
-  let label_ance = 'common'
+  let label_ance = s:getText(a:firstline + ance_mark)
   let label_endd = s:getText(a:firstline + endd_mark)
 
   let file_head = tempname()
@@ -34,9 +34,9 @@ function! diffdiff#DiffDiff() range
     let t:_DiffDiffbufnr = bufnr('%')
   endif
 
-  silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label "'.label_head .'"'
+  silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label "'.label_ance.'" --label "'.label_head .'"'
   silent :execute 'r !echo "\n\n\n"'
-  silent :execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label "'.label_endd .'"'
+  silent :execute 'r !diff -u '.file_ance.' '.file_merg.' --label "'.label_ance.'" --label "'.label_endd .'"'
 
   set nomodified
   nnoremap <silent> <buffer> q :bw<cr>
