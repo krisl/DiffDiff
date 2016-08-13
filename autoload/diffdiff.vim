@@ -1,9 +1,10 @@
 function! diffdiff#DiffDiff() range
   let diff = getline(a:firstline, a:lastline)
-  let head_mark = match(diff, '<<<<<<<')
-  let ance_mark = match(diff, '|||||||', head_mark+1)
-  let merg_mark = match(diff, '=======', ance_mark+1)
-  let endd_mark = match(diff, '>>>>>>>', merg_mark+1)
+  let head_mark = match(diff, '^<\{7}<\@!')
+  let ance_mark = match(diff, '^|\{7}|\@!', head_mark+1)
+  let merg_mark = match(diff, '^=\{7}=\@!', ance_mark+1)
+  let endd_mark = match(diff, '^>\{7}>\@!', merg_mark+1)
+
   if endd_mark == -1
     let endd_mark = 0 "exclude end marker
   endif
