@@ -1,3 +1,7 @@
+function! s:getText(lineno)
+   return matchstr(getline(a:lineno), '^\([<|=>]\)\{7}\0\@! \zs.*$')
+endfunction
+
 function! diffdiff#DiffDiff() range
   let diff = getline(a:firstline, a:lastline)
   let head_mark = match(diff, '^<\{7}<\@!')
@@ -8,6 +12,10 @@ function! diffdiff#DiffDiff() range
   if endd_mark == -1
     let endd_mark = 0 "exclude end marker
   endif
+
+  let label_head = s:getText(a:firstline + head_mark)
+  let label_ance = 'common'
+  let label_endd = s:getText(a:firstline + endd_mark)
 
   let file_head = tempname()
   let file_ance = tempname()
@@ -26,9 +34,9 @@ function! diffdiff#DiffDiff() range
     let t:_DiffDiffbufnr = bufnr('%')
   endif
 
-  silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label HEAD'
+  silent :execute 'r !diff -u '.file_ance.' '.file_head.' --label common --label "'.label_head .'"'
   silent :execute 'r !echo "\n\n\n"'
-  silent :execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label merg'
+  silent :execute 'r !diff -u '.file_ance.' '.file_merg.' --label common --label "'.label_endd .'"'
 
   set nomodified
   nnoremap <silent> <buffer> q :bw<cr>
