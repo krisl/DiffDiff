@@ -14,7 +14,7 @@ function! diffdiff#DiffDiff() range
   endif
 
   let label_head = s:getText(a:firstline + head_mark)
-  let label_ance = s:getText(a:firstline + ance_mark)
+  let label_ance = 'common' "s:getText(a:firstline + ance_mark)
   let label_endd = s:getText(a:firstline + endd_mark)
 
   let file_head = tempname()
