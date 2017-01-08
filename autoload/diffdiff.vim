@@ -1,5 +1,5 @@
 function! s:getText(lineno)
-   return matchstr(getline(a:lineno), '^\([<|=>]\)\{7}\0\@! \zs.*$')
+   return matchstr(getline(a:lineno), '^[<|=>]\{7}\($\| \)\zs.*$')
 endfunction
 
 function! diffdiff#DiffDiff() range
